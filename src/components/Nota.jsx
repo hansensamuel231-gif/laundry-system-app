@@ -10,7 +10,7 @@ export function Nota({ tx }) {
         <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Shirt className="h-5 w-5" />
         </div>
-        <h2 className="text-lg font-bold">LaundryPro</h2>
+        <h2 className="text-lg font-bold">Zahra Laundry</h2>
         <p className="text-xs text-muted-foreground">Jl. Bersih No. 123, Jakarta</p>
         <p className="text-xs text-muted-foreground">Telp: 021-1234567</p>
       </div>

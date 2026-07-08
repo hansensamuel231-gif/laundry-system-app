@@ -30,7 +30,7 @@ export function Sidebar({ open, onClose }) {
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Shirt className="h-5 w-5" />
             </div>
-            <span className="text-lg font-bold text-primary-foreground">LaundryPro</span>
+            <span className="text-lg font-bold text-primary-foreground">Zahra Laundry</span>
           </div>
           <button
             onClick={onClose}

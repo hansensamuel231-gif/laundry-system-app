@@ -18,7 +18,7 @@ export default function Login() {
     setError("")
     const res = login(username.trim(), password)
     if (res.ok) {
-      navigate("/", { replace: true })
+      navigate("/dashboard", { replace: true })
     } else {
       setError(res.message)
     }
@@ -37,7 +37,7 @@ export default function Login() {
           <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg">
             <Shirt className="h-8 w-8" />
           </div>
-          <h1 className="text-2xl font-bold text-primary-foreground">LaundryPro</h1>
+          <h1 className="text-2xl font-bold text-primary-foreground">Zahra Laundry</h1>
           <p className="mt-1 text-sm text-sidebar-foreground">Sistem Manajemen Laundry</p>
         </div>
 

@@ -1,13 +1,8 @@
-// Master data layanan (harga per kg / per satuan)
 export const initialServices = [
-  { id: 1, name: "Cuci Kering", unit: "kg", price: 5000 },
-  { id: 2, name: "Cuci Setrika", unit: "kg", price: 7000 },
-  { id: 3, name: "Setrika Saja", unit: "kg", price: 4000 },
-  { id: 4, name: "Cuci Express (6 Jam)", unit: "kg", price: 12000 },
-  { id: 5, name: "Cuci Selimut", unit: "pcs", price: 20000 },
-  { id: 6, name: "Cuci Bed Cover", unit: "pcs", price: 25000 },
-  { id: 7, name: "Cuci Sepatu", unit: "pasang", price: 30000 },
-  { id: 8, name: "Dry Clean Jas", unit: "pcs", price: 35000 },
+  { id: 1, name: "Cuci Kering", unit: "kg", price: 5000, minPrice: 15000, duration: "2 hari" },
+  { id: 2, name: "Cuci Setrika", unit: "kg", price: 7000, minPrice: 20000, duration: "2 hari" },
+  { id: 3, name: "Setrika Saja", unit: "kg", price: 4000, minPrice: 12000, duration: "1 hari" },
+  { id: 4, name: "Express", unit: "kg", price: 10000, minPrice: 30000, duration: "6 jam" },
 ]
 
 export const fragrances = ["Tanpa Pewangi", "Lavender", "Ocean Fresh", "Sakura", "Lemon", "Vanilla"]

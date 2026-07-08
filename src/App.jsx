@@ -27,37 +27,17 @@ export default function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/transaksi/baru" element={<NewTransaction />} />
             <Route path="/transaksi" element={<TransactionList />} />
             <Route path="/pelanggan" element={<Customers />} />
-            <Route
-              path="/laporan"
-              element={
-                <ProtectedRoute roles={["admin"]}>
-                  <Reports />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/harga"
-              element={
-                <ProtectedRoute roles={["admin"]}>
-                  <Pricing />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/pengguna"
-              element={
-                <ProtectedRoute roles={["admin"]}>
-                  <UserManagement />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/laporan" element={<Reports />} />
+            <Route path="/pengaturan/harga" element={<Pricing />} />
+            <Route path="/pengaturan/user" element={<UserManagement />} />
           </Route>
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </StoreProvider>
     </AuthProvider>
