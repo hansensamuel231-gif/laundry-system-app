@@ -349,7 +349,7 @@ function KasirDashboard() {
 
   // Quick Action to update status to Selesai
   const handleMarkAsSelesai = (id, invoice) => {
-    updateTransaction(id, { status: "Selesai" })
+    updateTransaction(id, { status: "Selesai", date: todayStr })
     showToast(`Status transaksi ${invoice} berhasil diperbarui menjadi Selesai`)
   }
 

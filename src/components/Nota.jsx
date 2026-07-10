@@ -11,7 +11,7 @@ export function Nota({ tx }) {
           <Shirt className="h-5 w-5" />
         </div>
         <h2 className="text-lg font-bold">Zahra Laundry</h2>
-        <p className="text-xs text-muted-foreground">Jl. Bersih No. 123, Jakarta</p>
+        <p className="text-xs text-muted-foreground">Jl. Bersih No. 123, Jambi</p>
         <p className="text-xs text-muted-foreground">Telp: 021-1234567</p>
       </div>
 

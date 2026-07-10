@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react"
+import { createContext, useContext, useMemo, useState, useEffect } from "react"
 import {
   initialServices,
   initialUsers,
@@ -9,12 +9,77 @@ import {
 const StoreContext = createContext(null)
 
 export function StoreProvider({ children }) {
-  const [services, setServices] = useState(initialServices)
-  const [users, setUsers] = useState(initialUsers)
-  const [customers, setCustomers] = useState(() => generateCustomers(30))
-  const [transactions, setTransactions] = useState(() =>
-    generateTransactions(generateCustomers(30), initialServices, 50),
-  )
+  const [services, setServices] = useState(() => {
+    try {
+      const saved = localStorage.getItem("zahra_laundry_services")
+      return saved ? JSON.parse(saved) : initialServices
+    } catch (e) {
+      return initialServices
+    }
+  })
+
+  const [users, setUsers] = useState(() => {
+    try {
+      const saved = localStorage.getItem("zahra_laundry_users")
+      return saved ? JSON.parse(saved) : initialUsers
+    } catch (e) {
+      return initialUsers
+    }
+  })
+
+  const [storeData] = useState(() => {
+    try {
+      const savedCust = localStorage.getItem("zahra_laundry_customers")
+      const savedTx = localStorage.getItem("zahra_laundry_transactions")
+      if (savedCust && savedTx) {
+        return {
+          customers: JSON.parse(savedCust),
+          transactions: JSON.parse(savedTx),
+        }
+      }
+    } catch (e) {}
+
+    const generatedCustomers = generateCustomers(30)
+    const generatedTransactions = generateTransactions(generatedCustomers, initialServices, 50)
+
+    try {
+      localStorage.setItem("zahra_laundry_customers", JSON.stringify(generatedCustomers))
+      localStorage.setItem("zahra_laundry_transactions", JSON.stringify(generatedTransactions))
+    } catch (e) {}
+
+    return {
+      customers: generatedCustomers,
+      transactions: generatedTransactions,
+    }
+  })
+
+  const [customers, setCustomers] = useState(storeData.customers)
+  const [transactions, setTransactions] = useState(storeData.transactions)
+
+  // Sync to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem("zahra_laundry_services", JSON.stringify(services))
+    } catch (e) {}
+  }, [services])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("zahra_laundry_users", JSON.stringify(users))
+    } catch (e) {}
+  }, [users])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("zahra_laundry_customers", JSON.stringify(customers))
+    } catch (e) {}
+  }, [customers])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("zahra_laundry_transactions", JSON.stringify(transactions))
+    } catch (e) {}
+  }, [transactions])
 
   // ------- Transactions -------
   function addTransaction(tx) {

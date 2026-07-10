@@ -8,14 +8,8 @@ export const initialServices = [
 export const fragrances = ["Tanpa Pewangi", "Lavender", "Ocean Fresh", "Sakura", "Lemon", "Vanilla"]
 
 export const initialUsers = [
-  { id: 1, username: "admin", password: "admin123", name: "Budi Santoso", role: "Admin", status: "Aktif" },
-  { id: 2, username: "kasir", password: "kasir123", name: "Siti Aminah", role: "Kasir", status: "Aktif" },
-  { id: 3, username: "kasir2", password: "kasir123", name: "Rina Wati", role: "Kasir", status: "Aktif" },
-  { id: 4, username: "dewi", password: "dewi123", name: "Dewi Lestari", role: "Kasir", status: "Aktif" },
-  { id: 5, username: "andi", password: "andi123", name: "Andi Pratama", role: "Kasir", status: "Nonaktif" },
-  { id: 6, username: "manager", password: "mgr123", name: "Joko Widodo", role: "Admin", status: "Aktif" },
-  { id: 7, username: "eka", password: "eka123", name: "Eka Kurnia", role: "Kasir", status: "Aktif" },
-  { id: 8, username: "fajar", password: "fajar123", name: "Fajar Nugroho", role: "Kasir", status: "Nonaktif" },
+  { id: 1, username: "admin", password: "admin123", name: "Zahra Aulia Rahman", role: "Admin", status: "Aktif" },
+  { id: 2, username: "kasir", password: "kasir123", name: "Aisha Maharani", role: "Kasir", status: "Aktif" },
 ]
 
 const firstNames = [
@@ -27,7 +21,18 @@ const lastNames = [
   "Santoso", "Wijaya", "Kusuma", "Halim", "Pratama", "Saputra", "Nugroho", "Lestari",
   "Wibowo", "Utami", "Hartono", "Anggraini", "Setiawan", "Maharani", "Firmansyah",
 ]
-const streets = ["Jl. Merdeka", "Jl. Sudirman", "Jl. Diponegoro", "Jl. Gatot Subroto", "Jl. Melati", "Jl. Kenanga", "Jl. Mawar", "Jl. Anggrek"]
+const streets = [
+  "Jl. Sultan Thaha",
+  "Jl. Gatot Subroto",
+  "Jl. Jenderal Sudirman",
+  "Jl. Ahmad Yani",
+  "Jl. Arif Rahman Hakim",
+  "Jl. Kolonel Abunjani",
+  "Jl. Pattimura",
+  "Jl. Hayam Wuruk",
+  "Jl. Orang Kayo Hitam",
+  "Jl. H. Adam Malik"
+]
 
 function rand(arr) {
   return arr[Math.floor(Math.random() * arr.length)]
@@ -44,7 +49,7 @@ export function generateCustomers(count = 30) {
       id: i,
       name,
       phone: `08${randInt(11, 89)}${randInt(1000000, 9999999)}`,
-      address: `${rand(streets)} No. ${randInt(1, 200)}, Jakarta`,
+      address: `${rand(streets)} No. ${randInt(1, 200)}, Jambi`,
       createdAt: randomDate(120),
     })
   }
@@ -61,13 +66,25 @@ const statuses = ["Pending", "Proses", "Selesai"]
 
 export function generateTransactions(customers, services, count = 50) {
   const transactions = []
+  const todayStr = new Date().toISOString().slice(0, 10)
   for (let i = 1; i <= count; i++) {
     const customer = rand(customers)
     const service = rand(services)
     const weight = service.unit === "kg" ? randInt(2, 12) : randInt(1, 4)
     const price = weight * service.price
-    const status = rand(statuses)
-    const date = randomDate(60)
+    
+    let status = rand(statuses)
+    let date = randomDate(60)
+    
+    // Pastikan ada transaksi hari ini dengan status Proses & Pending untuk pengujian
+    if (i === 1) {
+      status = "Proses"
+      date = todayStr
+    } else if (i === 2) {
+      status = "Pending"
+      date = todayStr
+    }
+
     transactions.push({
       id: i,
       invoice: `INV-${String(2500 + i).padStart(5, "0")}`,
